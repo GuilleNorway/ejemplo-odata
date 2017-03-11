@@ -4,7 +4,7 @@ import com.cairone.odataexample.edm.resources.ProvinciaEdm;
 
 public class ProvinciaFrmDto {
 
-	private Integer paisID = null;
+	private Integer paisId = null;
 	private Integer id = null;
 	private String nombre = null;
 	
@@ -12,26 +12,26 @@ public class ProvinciaFrmDto {
 		super();
 	}
 
-	public ProvinciaFrmDto(Integer paisID, Integer id, String nombre) {
+	public ProvinciaFrmDto(Integer paisId, Integer id, String nombre) {
 		super();
-		this.paisID = paisID;
+		this.paisId = paisId;
 		this.id = id;
 		this.nombre = nombre;
 	}
 
 	public ProvinciaFrmDto(ProvinciaEdm provinciaEdm) {
 		super();
-		this.paisID = provinciaEdm.getPaisId();
+		this.paisId = provinciaEdm.getPaisId();
 		this.id = provinciaEdm.getId();
 		this.nombre = provinciaEdm.getNombre();
 	}
 
-	public Integer getPaisID() {
-		return paisID;
+	public Integer getPais() {
+		return paisId;
 	}
 
-	public void setPaisID(Integer paisID) {
-		this.paisID = paisID;
+	public void setPaisID(Integer paisId) {
+		this.paisId = paisId;
 	}
 
 	public Integer getId() {
