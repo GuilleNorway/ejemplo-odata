@@ -34,7 +34,11 @@ public class ProvinciaEdm {
 	}
 	
 	public ProvinciaEdm(ProvinciaEntity provinciaEntity) {
-		this(provinciaEntity.getId(), new PaisEdm(provinciaEntity.getPais()), provinciaEntity.getNombre());
+		this(
+				provinciaEntity.getId(), 
+				new PaisEdm(provinciaEntity.getPais()), 
+				provinciaEntity.getNombre()
+			);
 	}
 
 	public Integer getId() {

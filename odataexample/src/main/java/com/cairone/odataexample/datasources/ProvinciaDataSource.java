@@ -100,7 +100,7 @@ public class ProvinciaDataSource implements DataSourceProvider, DataSource {
 		if (entity instanceof ProvinciaEdm){
 			
 			/** Que hace esto? **/
-			Map<String, Object> oDataUriKeyValues = ODataUriUtil.asJavaMap(ODataUriUtil.getEntityKeyMap(uri, entityDataModel));
+			/*Map<String, Object> oDataUriKeyValues = ODataUriUtil.asJavaMap(ODataUriUtil.getEntityKeyMap(uri, entityDataModel));
 			
 			ProvinciaEdm provinciaEdm = (ProvinciaEdm) entity;
 
@@ -109,9 +109,9 @@ public class ProvinciaDataSource implements DataSourceProvider, DataSource {
 				provinciaEdm.setId(Integer.valueOf(item.toString()));
 			});
 			
+			*/
 			
-			
-		}
+		} 
 		
 		return null;
 	}
