@@ -15,7 +15,7 @@ public class GeneroConverter implements AttributeConverter<GeneroEnum, Character
 
 	@Override
 	public GeneroEnum convertToEntityAttribute(Character dbData) {
-		switch(dbData) {
+		switch (dbData) {
 		case 'F':
 			return GeneroEnum.FEMENINO;
 		case 'M':

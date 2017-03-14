@@ -9,12 +9,12 @@ import javax.persistence.Embeddable;
 public class LocalidadPKEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	private ProvinciaPKEntity provinciaPK = null;
-	
-	@Column(name="id_localidad", nullable = false)
+
+	@Column(name = "id_localidad", nullable = false)
 	private Integer localidadId = null;
-	
+
 	public LocalidadPKEntity() {
 		provinciaPK = new ProvinciaPKEntity();
 	}
@@ -47,10 +47,8 @@ public class LocalidadPKEntity implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((localidadId == null) ? 0 : localidadId.hashCode());
-		result = prime * result
-				+ ((provinciaPK == null) ? 0 : provinciaPK.hashCode());
+		result = prime * result + ((localidadId == null) ? 0 : localidadId.hashCode());
+		result = prime * result + ((provinciaPK == null) ? 0 : provinciaPK.hashCode());
 		return result;
 	}
 

@@ -5,6 +5,7 @@ import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 
 import com.cairone.odataexample.entities.TipoDocumentoEntity;
 
-public interface TipoDocumentoRepository extends JpaRepository<TipoDocumentoEntity, Integer>, QueryDslPredicateExecutor<TipoDocumentoEntity> {
+public interface TipoDocumentoRepository
+		extends JpaRepository<TipoDocumentoEntity, Integer>, QueryDslPredicateExecutor<TipoDocumentoEntity> {
 
 }

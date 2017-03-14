@@ -8,7 +8,7 @@ import org.springframework.validation.Validator;
 import com.cairone.odataexample.dtos.ProvinciaFrmDto;
 
 @Component
-public class ProvinciaFrmDtoValidator implements Validator{
+public class ProvinciaFrmDtoValidator implements Validator {
 
 	@Override
 	public boolean supports(Class<?> clazz) {
@@ -18,9 +18,9 @@ public class ProvinciaFrmDtoValidator implements Validator{
 	@Override
 	public void validate(Object target, Errors errors) {
 
-		ValidationUtils.rejectIfEmpty(errors, "paisId", "required", new Object[] {"ID DEL PAIS"});
-		ValidationUtils.rejectIfEmpty(errors, "id", "required", new Object[] {"ID DE LA PROVINCIA"});
-		ValidationUtils.rejectIfEmpty(errors, "nombre", "required", new Object[] {"NOMBRE DE LA PROVINCA"});
+		ValidationUtils.rejectIfEmpty(errors, "paisId", "required", new Object[] { "ID DEL PAIS" });
+		ValidationUtils.rejectIfEmpty(errors, "id", "required", new Object[] { "ID DE LA PROVINCIA" });
+		ValidationUtils.rejectIfEmpty(errors, "nombre", "required", new Object[] { "NOMBRE DE LA PROVINCA" });
 
 	}
 

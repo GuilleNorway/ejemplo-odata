@@ -4,21 +4,23 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-@Entity @Table(name="provincias", uniqueConstraints = @UniqueConstraint(columnNames = {"id_pais", "nombre"}))
+@Entity
+@Table(name = "provincias", uniqueConstraints = @UniqueConstraint(columnNames = { "id_pais", "nombre" }))
 public class ProvinciaEntity implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private ProvinciaPKEntity pk = null;
 
-	@Column(name="id_provincia", nullable = false, insertable = false, updatable = false)
+	@Column(name = "id_provincia", nullable = false, insertable = false, updatable = false)
 	private Integer id = null;
-	
-	@Column(name="nombre", nullable = false, length = 100)
+
+	@Column(name = "nombre", nullable = false, length = 100)
 	private String nombre = null;
 
-	@OneToOne @JoinColumn(name="id_pais", nullable = false, insertable = false, updatable = false)
+	@OneToOne
+	@JoinColumn(name = "id_pais", nullable = false, insertable = false, updatable = false)
 	private PaisEntity pais = null;
 
 	public ProvinciaEntity() {

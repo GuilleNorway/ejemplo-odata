@@ -5,7 +5,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.sdl.odata.controller.AbstractODataController;
 
-@RestController @RequestMapping("/odata/appexample.svc/**")
+@RestController
+@RequestMapping("/odata/appexample.svc/**")
 public class ODataController extends AbstractODataController {
 
 }

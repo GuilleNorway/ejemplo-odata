@@ -9,23 +9,25 @@ import javax.persistence.JoinColumns;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-@Entity @Table(name="usuarios_permisos")
+@Entity
+@Table(name = "usuarios_permisos")
 public class UsuarioPermisoEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private UsuarioPermisoPKEntity pk = null;
-	
-	@OneToOne @JoinColumns({
-		@JoinColumn(name = "id_tipodoc", referencedColumnName = "id_tipodoc", nullable = false, insertable = false, updatable = false),
-		@JoinColumn(name = "numero_documento", referencedColumnName = "numero_documento", nullable = false, insertable = false, updatable = false)
-	})
+
+	@OneToOne
+	@JoinColumns({
+			@JoinColumn(name = "id_tipodoc", referencedColumnName = "id_tipodoc", nullable = false, insertable = false, updatable = false),
+			@JoinColumn(name = "numero_documento", referencedColumnName = "numero_documento", nullable = false, insertable = false, updatable = false) })
 	private UsuarioEntity usuario = null;
-	
-	@OneToOne @JoinColumn(name = "nombre_permiso", nullable = false, insertable = false, updatable = false)
+
+	@OneToOne
+	@JoinColumn(name = "nombre_permiso", nullable = false, insertable = false, updatable = false)
 	private PermisoEntity permiso = null;
-	
+
 	public UsuarioPermisoEntity() {
 		pk = new UsuarioPermisoPKEntity();
 	}
@@ -80,5 +82,5 @@ public class UsuarioPermisoEntity implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 }

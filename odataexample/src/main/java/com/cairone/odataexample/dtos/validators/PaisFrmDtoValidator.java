@@ -17,14 +17,14 @@ public class PaisFrmDtoValidator implements Validator {
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		
+
 		PaisFrmDto frmDto = (PaisFrmDto) target;
-		
-		ValidationUtils.rejectIfEmpty(errors, "id", "required", new Object[] {"ID"});
-		ValidationUtils.rejectIfEmpty(errors, "nombre", "required", new Object[] {"NOMBRE"});
-		
-		if(frmDto.getPrefijo() != null && frmDto.getPrefijo() <= 0) {
-			errors.rejectValue("prefijo", "invalid", new Object[] {"PREFIJO TELEFONICO"}, null);
+
+		ValidationUtils.rejectIfEmpty(errors, "id", "required", new Object[] { "ID" });
+		ValidationUtils.rejectIfEmpty(errors, "nombre", "required", new Object[] { "NOMBRE" });
+
+		if (frmDto.getPrefijo() != null && frmDto.getPrefijo() <= 0) {
+			errors.rejectValue("prefijo", "invalid", new Object[] { "PREFIJO TELEFONICO" }, null);
 		}
 	}
 }

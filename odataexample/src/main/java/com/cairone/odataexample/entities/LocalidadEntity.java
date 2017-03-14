@@ -35,7 +35,7 @@ public class LocalidadEntity implements Serializable {
 	private Integer cp = null;
 	
 	@Column(name="prefijo", nullable = true)
-	private Integer prefijo = null;
+	private Integer prefijo = null;F
 	
 	public LocalidadEntity() {
 		this.pk = new LocalidadPKEntity();

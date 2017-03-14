@@ -42,127 +42,130 @@ import com.sdl.odata.api.processor.query.strategy.QueryOperationStrategy;
 import com.sdl.odata.api.service.ODataRequestContext;
 
 @Component
-public class PaisDataSource implements DataSourceProvider, DataSource  {
+public class PaisDataSource implements DataSourceProvider, DataSource {
 
-	@Autowired private PaisRepository paisRepository = null;
-	@Autowired private PaisFrmDtoValidator paisFrmDtoValidator = null;
-	
+	@Autowired
+	private PaisRepository paisRepository = null;
+	@Autowired
+	private PaisFrmDtoValidator paisFrmDtoValidator = null;
+
 	@Autowired
 	private MessageSource messageSource = null;
-	
+
 	@Override
 	public Object create(ODataUri uri, Object entity, EntityDataModel entityDataModel) throws ODataException {
-		
-		if(entity instanceof PaisEdm) {
-			
-			PaisEdm paisEdm = (PaisEdm) entity;
-    		PaisFrmDto paisFrmDto = new PaisFrmDto(paisEdm);
 
-    		DataBinder binder = new DataBinder(paisFrmDto);
-			
+		if (entity instanceof PaisEdm) {
+
+			PaisEdm paisEdm = (PaisEdm) entity;
+			PaisFrmDto paisFrmDto = new PaisFrmDto(paisEdm);
+
+			DataBinder binder = new DataBinder(paisFrmDto);
+
 			binder.setValidator(paisFrmDtoValidator);
 			binder.validate();
-			
+
 			BindingResult bindingResult = binder.getBindingResult();
-			
-			if(bindingResult.hasFieldErrors()) {
-				
+
+			if (bindingResult.hasFieldErrors()) {
+
 				for (Object object : bindingResult.getAllErrors()) {
-				    if(object instanceof FieldError) {
-				        FieldError fieldError = (FieldError) object;
-				        String message = messageSource.getMessage(fieldError, null);
-				        throw new ODataDataSourceException(
-				        		String.format("HAY DATOS INVALIDOS EN LA SOLICITUD ENVIADA. %s", message));
-				    }
+					if (object instanceof FieldError) {
+						FieldError fieldError = (FieldError) object;
+						String message = messageSource.getMessage(fieldError, null);
+						throw new ODataDataSourceException(
+								String.format("HAY DATOS INVALIDOS EN LA SOLICITUD ENVIADA. %s", message));
+					}
 				}
 			}
-			
+
 			PaisEntity paisEntity = new PaisEntity();
 
 			paisEntity.setId(paisFrmDto.getId());
-    		paisEntity.setNombre(paisFrmDto.getNombre());
-    		paisEntity.setPrefijo(paisFrmDto.getPrefijo());
-    		
+			paisEntity.setNombre(paisFrmDto.getNombre());
+			paisEntity.setPrefijo(paisFrmDto.getPrefijo());
+
 			paisRepository.save(paisEntity);
-			
+
 			return new PaisEdm(paisEntity);
 		}
-		
+
 		throw new ODataDataSourceException("LOS DATOS NO CORRESPONDEN A LA ENTIDAD PAIS");
 	}
 
 	@Override
 	public Object update(ODataUri uri, Object entity, EntityDataModel entityDataModel) throws ODataException {
 
-    	if(entity instanceof PaisEdm) {
-    		
-    		Map<String, Object> oDataUriKeyValues = ODataUriUtil.asJavaMap(ODataUriUtil.getEntityKeyMap(uri, entityDataModel));
-    		
-    		PaisEdm pais = (PaisEdm) entity;
-    		
-    		oDataUriKeyValues.values().forEach(item -> {
-    			pais.setId(Integer.valueOf( item.toString() ));
-    		});
-    		
-    		PaisFrmDto paisFrmDto = new PaisFrmDto(pais);
+		if (entity instanceof PaisEdm) {
 
-    		DataBinder binder = new DataBinder(paisFrmDto);
-			
+			Map<String, Object> oDataUriKeyValues = ODataUriUtil
+					.asJavaMap(ODataUriUtil.getEntityKeyMap(uri, entityDataModel));
+
+			PaisEdm pais = (PaisEdm) entity;
+
+			oDataUriKeyValues.values().forEach(item -> {
+				pais.setId(Integer.valueOf(item.toString()));
+			});
+
+			PaisFrmDto paisFrmDto = new PaisFrmDto(pais);
+
+			DataBinder binder = new DataBinder(paisFrmDto);
+
 			binder.setValidator(paisFrmDtoValidator);
 			binder.validate();
-			
+
 			BindingResult bindingResult = binder.getBindingResult();
 
-			if(bindingResult.hasFieldErrors()) {
-				
+			if (bindingResult.hasFieldErrors()) {
+
 				for (Object object : bindingResult.getAllErrors()) {
-				    if(object instanceof FieldError) {
-				        FieldError fieldError = (FieldError) object;
-				        String message = messageSource.getMessage(fieldError, null);
-				        throw new ODataDataSourceException(
-				        		String.format("HAY DATOS INVALIDOS EN LA SOLICITUD ENVIADA. %s", message));
-				    }
+					if (object instanceof FieldError) {
+						FieldError fieldError = (FieldError) object;
+						String message = messageSource.getMessage(fieldError, null);
+						throw new ODataDataSourceException(
+								String.format("HAY DATOS INVALIDOS EN LA SOLICITUD ENVIADA. %s", message));
+					}
 				}
 			}
-			
-        	Integer paisID = pais.getId();
-        	PaisEntity paisEntity = paisRepository.findOne(paisID);
 
-    		if(paisEntity == null) {
-    			throw new ODataDataSourceException(String.format("NO SE ENCUENTRA UN PAIS CON ID %s", pais.getId()));
-    		}
-    		
-    		paisEntity.setNombre(paisFrmDto.getNombre());
-    		paisEntity.setPrefijo(paisFrmDto.getPrefijo());
-    		
-    		paisRepository.save(paisEntity);
-    		
-    		return new PaisEdm(paisEntity);
-    	}
-    	
-    	throw new ODataDataSourceException("LOS DATOS NO CORRESPONDEN A LA ENTIDAD PAIS");
+			Integer paisID = pais.getId();
+			PaisEntity paisEntity = paisRepository.findOne(paisID);
+
+			if (paisEntity == null) {
+				throw new ODataDataSourceException(String.format("NO SE ENCUENTRA UN PAIS CON ID %s", pais.getId()));
+			}
+
+			paisEntity.setNombre(paisFrmDto.getNombre());
+			paisEntity.setPrefijo(paisFrmDto.getPrefijo());
+
+			paisRepository.save(paisEntity);
+
+			return new PaisEdm(paisEntity);
+		}
+
+		throw new ODataDataSourceException("LOS DATOS NO CORRESPONDEN A LA ENTIDAD PAIS");
 	}
 
 	@Override
 	public void delete(ODataUri uri, EntityDataModel entityDataModel) throws ODataException {
-		
+
 		Option<Object> entity = ODataUriUtil.extractEntityWithKeys(uri, entityDataModel);
-    	
-    	if(entity.isDefined()) {
-    		
-    		PaisEdm pais = (PaisEdm) entity.get();
-    		PaisEntity paisEntity = paisRepository.findOne(pais.getId());
-            
-    		if(paisEntity == null) {
-    			throw new ODataDataSourceException(String.format("NO SE ENCUENTRA UN PAIS CON ID %s", pais.getId()));
-    		}
-    		
-    		paisRepository.delete(paisEntity);
-    		
-    		return;
-        }
-    	
-    	throw new ODataDataSourceException("LOS DATOS NO CORRESPONDEN A LA ENTIDAD PAIS");
+
+		if (entity.isDefined()) {
+
+			PaisEdm pais = (PaisEdm) entity.get();
+			PaisEntity paisEntity = paisRepository.findOne(pais.getId());
+
+			if (paisEntity == null) {
+				throw new ODataDataSourceException(String.format("NO SE ENCUENTRA UN PAIS CON ID %s", pais.getId()));
+			}
+
+			paisRepository.delete(paisEntity);
+
+			return;
+		}
+
+		throw new ODataDataSourceException("LOS DATOS NO CORRESPONDEN A LA ENTIDAD PAIS");
 	}
 
 	@Override
@@ -177,9 +180,10 @@ public class PaisDataSource implements DataSourceProvider, DataSource  {
 	public TransactionalDataSource startTransaction() {
 		throw new ODataSystemException("No support for transactions");
 	}
-	
+
 	@Override
-	public boolean isSuitableFor(ODataRequestContext requestContext, String entityType) throws ODataDataSourceException {
+	public boolean isSuitableFor(ODataRequestContext requestContext, String entityType)
+			throws ODataDataSourceException {
 		return requestContext.getEntityDataModel().getType(entityType).getJavaType().equals(PaisEdm.class);
 	}
 
@@ -189,53 +193,56 @@ public class PaisDataSource implements DataSourceProvider, DataSource  {
 	}
 
 	@Override
-	public QueryOperationStrategy getStrategy(ODataRequestContext requestContext, QueryOperation operation, TargetType expectedODataEntityType) throws ODataException {
+	public QueryOperationStrategy getStrategy(ODataRequestContext requestContext, QueryOperation operation,
+			TargetType expectedODataEntityType) throws ODataException {
 
 		PaisesStrategyBuilder builder = new PaisesStrategyBuilder();
 		BooleanExpression expression = builder.buildCriteria(operation, requestContext);
 		List<Sort.Order> orderByList = builder.getOrderByList();
-		
+
 		int limit = builder.getLimit();
-        int skip = builder.getSkip();
+		int skip = builder.getSkip();
 		List<String> propertyNames = builder.getPropertyNames();
-		
-		Page<PaisEntity> pagePaisEntity = orderByList == null || orderByList.size() == 0 ?
-				paisRepository.findAll(expression, new PageRequest(0, limit)) :
-				paisRepository.findAll(expression, new PageRequest(0, limit, new Sort(orderByList)));
-		
+
+		Page<PaisEntity> pagePaisEntity = orderByList == null || orderByList.size() == 0
+				? paisRepository.findAll(expression, new PageRequest(0, limit))
+				: paisRepository.findAll(expression, new PageRequest(0, limit, new Sort(orderByList)));
+
 		List<PaisEntity> paisEntities = pagePaisEntity.getContent();
-		
+
 		return () -> {
 
-			List<PaisEdm> filtered = paisEntities.stream().map(entity -> { return new PaisEdm(entity); }).collect(Collectors.toList());
-			
+			List<PaisEdm> filtered = paisEntities.stream().map(entity -> {
+				return new PaisEdm(entity);
+			}).collect(Collectors.toList());
+
 			long count = 0;
-        	
-            if (builder.isCount() || builder.includeCount()) {
-                count = filtered.size();
 
-                if (builder.isCount()) {
-                    return QueryResult.from(count);
-                }
-            }
+			if (builder.isCount() || builder.includeCount()) {
+				count = filtered.size();
 
-            if (skip != 0 || limit != Integer.MAX_VALUE) {
-                filtered = filtered.stream().skip(skip).collect(Collectors.toList());
-            }
+				if (builder.isCount()) {
+					return QueryResult.from(count);
+				}
+			}
 
-            if (propertyNames != null && !propertyNames.isEmpty()) {
-                try {
-                    return QueryResult.from(EdmUtil.getEdmPropertyValue(filtered.get(0), propertyNames.get(0)));
-                } catch (IllegalAccessException e) {
-                    return QueryResult.from(Collections.emptyList());
-                }
-            }
-            
-            QueryResult result = QueryResult.from(filtered);
-            if (builder.includeCount()) {
-                result = result.withCount(count);
-            }
-            return result;
+			if (skip != 0 || limit != Integer.MAX_VALUE) {
+				filtered = filtered.stream().skip(skip).collect(Collectors.toList());
+			}
+
+			if (propertyNames != null && !propertyNames.isEmpty()) {
+				try {
+					return QueryResult.from(EdmUtil.getEdmPropertyValue(filtered.get(0), propertyNames.get(0)));
+				} catch (IllegalAccessException e) {
+					return QueryResult.from(Collections.emptyList());
+				}
+			}
+
+			QueryResult result = QueryResult.from(filtered);
+			if (builder.includeCount()) {
+				result = result.withCount(count);
+			}
+			return result;
 		};
 	}
 

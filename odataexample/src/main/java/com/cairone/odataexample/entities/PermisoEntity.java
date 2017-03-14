@@ -7,18 +7,21 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-@Entity @Table(name="permisos")
+@Entity
+@Table(name = "permisos")
 public class PermisoEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Id @Column(name="nombre_permiso", nullable = false, length = 50)
+	@Id
+	@Column(name = "nombre_permiso", nullable = false, length = 50)
 	private String nombre = null;
 
-	@Column(name="descripcion", nullable = false, length = 200)
+	@Column(name = "descripcion", nullable = false, length = 200)
 	private String descripcion = null;
 
-	public PermisoEntity() {}
+	public PermisoEntity() {
+	}
 
 	public PermisoEntity(String nombre, String descripcion) {
 		super();
@@ -66,5 +69,5 @@ public class PermisoEntity implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 }

@@ -4,21 +4,24 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-@Entity @Table(name="tipos_documentos")
+@Entity
+@Table(name = "tipos_documentos")
 public class TipoDocumentoEntity implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
-	@Id @Column(name="id_tipodoc")
+	@Id
+	@Column(name = "id_tipodoc")
 	private Integer id = null;
 
-	@Column(name="nombre", nullable = false, length = 100)
+	@Column(name = "nombre", nullable = false, length = 100)
 	private String nombre;
 
-	@Column(name="abreviatura", nullable = true, length = 5)
+	@Column(name = "abreviatura", nullable = true, length = 5)
 	private String abreviatura = null;
 
-	public TipoDocumentoEntity() {}
+	public TipoDocumentoEntity() {
+	}
 
 	public Integer getId() {
 		return id;

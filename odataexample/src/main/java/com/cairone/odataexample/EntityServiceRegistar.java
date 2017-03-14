@@ -17,13 +17,12 @@ public class EntityServiceRegistar {
 
 	public static final String NAME_SPACE = "com.cairone.odataexample";
 	public static final String CONTAINER_NAME = "ODataExample";
-	
-	@Autowired private ODataEdmRegistry oDataEdmRegistry = null;
+
+	@Autowired
+	private ODataEdmRegistry oDataEdmRegistry = null;
 
 	@PostConstruct
-    public void registerEntities() throws ODataException {
-		oDataEdmRegistry.registerClasses(Arrays.asList(
-				PaisEdm.class,
-				ProvinciaEdm.class));
-    }
+	public void registerEntities() throws ODataException {
+		oDataEdmRegistry.registerClasses(Arrays.asList(PaisEdm.class, ProvinciaEdm.class));
+	}
 }

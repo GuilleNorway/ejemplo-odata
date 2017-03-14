@@ -4,18 +4,21 @@ import java.io.Serializable;
 
 import javax.persistence.*;
 
-@Entity @Table(name="sectores")
+@Entity
+@Table(name = "sectores")
 public class SectorEntity implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
-	@Id @Column(name="id_sector")
+	@Id
+	@Column(name = "id_sector")
 	private Integer id = null;
 
-	@Column(name="nombre", nullable = false, length = 100)
+	@Column(name = "nombre", nullable = false, length = 100)
 	private String nombre = null;
 
-	public SectorEntity() {}
+	public SectorEntity() {
+	}
 
 	public Integer getId() {
 		return id;

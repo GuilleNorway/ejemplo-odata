@@ -13,26 +13,29 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity @Table(name="personas_sectores")
+@Entity
+@Table(name = "personas_sectores")
 public class PersonaSectorEntity implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
 	@EmbeddedId
 	private PersonaSectorPKEntity pk = null;
-	
-	@OneToOne @JoinColumns({
-		@JoinColumn(name = "id_tipodoc", referencedColumnName = "id_tipodoc", nullable = false, insertable = false, updatable = false),
-		@JoinColumn(name = "numero_documento", referencedColumnName = "numero_documento", nullable = false, insertable = false, updatable = false)
-	})
+
+	@OneToOne
+	@JoinColumns({
+			@JoinColumn(name = "id_tipodoc", referencedColumnName = "id_tipodoc", nullable = false, insertable = false, updatable = false),
+			@JoinColumn(name = "numero_documento", referencedColumnName = "numero_documento", nullable = false, insertable = false, updatable = false) })
 	private PersonaEntity persona = null;
-	
-	@OneToOne @JoinColumn(name = "id_sector", nullable = false, insertable = false, updatable = false)
+
+	@OneToOne
+	@JoinColumn(name = "id_sector", nullable = false, insertable = false, updatable = false)
 	private SectorEntity sector = null;
-	
-	@Column(name="fecha_ingreso", nullable = false) @Temporal(TemporalType.DATE)
+
+	@Column(name = "fecha_ingreso", nullable = false)
+	@Temporal(TemporalType.DATE)
 	private Date fechaIngreso = null;
-	
+
 	public PersonaSectorEntity() {
 		this.pk = new PersonaSectorPKEntity();
 	}

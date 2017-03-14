@@ -10,20 +10,21 @@ public class PersonaPKEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="id_tipodoc", nullable = false)
+	@Column(name = "id_tipodoc", nullable = false)
 	private Integer tipoDocId = null;
-	
-	@Column(name="numero_documento", length = 15, nullable = false)
+
+	@Column(name = "numero_documento", length = 15, nullable = false)
 	private String numeroDocumento = null;
-	
-	public PersonaPKEntity() {}
+
+	public PersonaPKEntity() {
+	}
 
 	public PersonaPKEntity(Integer tipoDocId, String numeroDocumento) {
 		super();
 		this.tipoDocId = tipoDocId;
 		this.numeroDocumento = numeroDocumento;
 	}
-	
+
 	public PersonaPKEntity(TipoDocumentoEntity tipoDocumentoEntity, String numeroDocumento) {
 		this(tipoDocumentoEntity.getId(), numeroDocumento);
 	}
@@ -48,10 +49,8 @@ public class PersonaPKEntity implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((numeroDocumento == null) ? 0 : numeroDocumento.hashCode());
-		result = prime * result
-				+ ((tipoDocId == null) ? 0 : tipoDocId.hashCode());
+		result = prime * result + ((numeroDocumento == null) ? 0 : numeroDocumento.hashCode());
+		result = prime * result + ((tipoDocId == null) ? 0 : tipoDocId.hashCode());
 		return result;
 	}
 

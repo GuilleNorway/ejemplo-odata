@@ -11,10 +11,10 @@ public class UsuarioPKEntity implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	private PersonaPKEntity personaPKEntity = null;
-	
+
 	@Transient
 	private Integer tipoDocId = null;
-	
+
 	@Transient
 	private String numeroDocumento = null;
 
@@ -56,8 +56,7 @@ public class UsuarioPKEntity implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((personaPKEntity == null) ? 0 : personaPKEntity.hashCode());
+		result = prime * result + ((personaPKEntity == null) ? 0 : personaPKEntity.hashCode());
 		return result;
 	}
 

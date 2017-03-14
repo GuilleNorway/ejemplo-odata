@@ -7,23 +7,25 @@ import com.sdl.odata.api.edm.annotations.EdmEntitySet;
 import com.sdl.odata.api.edm.annotations.EdmNavigationProperty;
 import com.sdl.odata.api.edm.annotations.EdmProperty;
 
-@EdmEntity(name = "Provincia", key = { "paisId", "id" }, namespace = EntityServiceRegistar.NAME_SPACE, containerName = EntityServiceRegistar.CONTAINER_NAME)
+@EdmEntity(name = "Provincia", key = { "paisId",
+		"id" }, namespace = EntityServiceRegistar.NAME_SPACE, containerName = EntityServiceRegistar.CONTAINER_NAME)
 @EdmEntitySet("Provincias")
 public class ProvinciaEdm {
 
 	@EdmProperty(nullable = false)
 	private Integer id = null;
-	
+
 	@EdmProperty(nullable = false)
 	private Integer paisId = null;
 
 	@EdmNavigationProperty
 	private PaisEdm pais = null;
-	
+
 	@EdmProperty(nullable = false)
 	private String nombre = null;
-	
-	public ProvinciaEdm() {}
+
+	public ProvinciaEdm() {
+	}
 
 	public ProvinciaEdm(Integer id, PaisEdm pais, String nombre) {
 		super();
@@ -32,13 +34,9 @@ public class ProvinciaEdm {
 		this.pais = pais;
 		this.nombre = nombre;
 	}
-	
+
 	public ProvinciaEdm(ProvinciaEntity provinciaEntity) {
-		this(
-				provinciaEntity.getId(), 
-				new PaisEdm(provinciaEntity.getPais()), 
-				provinciaEntity.getNombre()
-			);
+		this(provinciaEntity.getId(), new PaisEdm(provinciaEntity.getPais()), provinciaEntity.getNombre());
 	}
 
 	public Integer getId() {

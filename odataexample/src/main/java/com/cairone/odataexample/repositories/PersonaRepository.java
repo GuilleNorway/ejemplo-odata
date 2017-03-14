@@ -5,6 +5,7 @@ import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 
 import com.cairone.odataexample.entities.PersonaEntity;
 
-public interface PersonaRepository extends JpaRepository<PersonaEntity, Integer>, QueryDslPredicateExecutor<PersonaEntity> {
+public interface PersonaRepository
+		extends JpaRepository<PersonaEntity, Integer>, QueryDslPredicateExecutor<PersonaEntity> {
 
 }

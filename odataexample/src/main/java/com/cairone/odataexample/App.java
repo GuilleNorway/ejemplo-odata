@@ -8,9 +8,8 @@ import com.sdl.odata.service.ODataServiceConfiguration;
 
 @SpringBootApplication
 @Import({ ODataServiceConfiguration.class })
-public class App 
-{
-    public static void main( String[] args ) {
-    	SpringApplication.run(App.class, args);
-    }
+public class App {
+	public static void main(String[] args) {
+		SpringApplication.run(App.class, args);
+	}
 }

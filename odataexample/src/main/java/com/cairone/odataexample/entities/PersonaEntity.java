@@ -15,41 +15,44 @@ import javax.persistence.TemporalType;
 
 import com.cairone.odataexample.enums.GeneroEnum;
 
-@Entity @Table(name="personas")
+@Entity
+@Table(name = "personas")
 public class PersonaEntity implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
-	@EmbeddedId private PersonaPKEntity pk = null;
-	
-	@OneToOne @JoinColumn(name = "id_tipodoc", nullable = false, insertable = false, updatable = false)
+	@EmbeddedId
+	private PersonaPKEntity pk = null;
+
+	@OneToOne
+	@JoinColumn(name = "id_tipodoc", nullable = false, insertable = false, updatable = false)
 	private TipoDocumentoEntity tipoDocumento = null;
 
-	@Column(name="numero_documento", nullable = false, length = 15, insertable = false, updatable = false)
+	@Column(name = "numero_documento", nullable = false, length = 15, insertable = false, updatable = false)
 	private String numeroDocumento = null;
 
-	@Column(name="nombres", nullable = false, length = 100)
+	@Column(name = "nombres", nullable = false, length = 100)
 	private String nombres = null;
 
-	@Column(name="apellidos", nullable = false, length = 100)
+	@Column(name = "apellidos", nullable = false, length = 100)
 	private String apellidos = null;
 
-	@Column(name="apodo", length = 100)
+	@Column(name = "apodo", length = 100)
 	private String apodo = null;
-	
-	@OneToOne @JoinColumns({
-		@JoinColumn(name = "id_pais", referencedColumnName = "id_pais", nullable = false),
-		@JoinColumn(name = "id_provincia", referencedColumnName = "id_provincia", nullable = false),
-		@JoinColumn(name = "id_localidad", referencedColumnName = "id_localidad", nullable = false)
-	})
+
+	@OneToOne
+	@JoinColumns({ @JoinColumn(name = "id_pais", referencedColumnName = "id_pais", nullable = false),
+			@JoinColumn(name = "id_provincia", referencedColumnName = "id_provincia", nullable = false),
+			@JoinColumn(name = "id_localidad", referencedColumnName = "id_localidad", nullable = false) })
 	private LocalidadEntity localidad = null;
-	
-	@Column(name="fecha_alta", nullable = true) @Temporal(TemporalType.DATE)
+
+	@Column(name = "fecha_alta", nullable = true)
+	@Temporal(TemporalType.DATE)
 	private Date fechaAlta = null;
-	
-	@Column(name="genero", nullable = false, length = 1)
+
+	@Column(name = "genero", nullable = false, length = 1)
 	private GeneroEnum genero = null;
-	
+
 	public PersonaEntity() {
 		pk = new PersonaPKEntity();
 	}

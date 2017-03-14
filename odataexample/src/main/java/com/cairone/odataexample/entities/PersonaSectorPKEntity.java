@@ -10,16 +10,17 @@ public class PersonaSectorPKEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="id_tipodoc", nullable = false)
+	@Column(name = "id_tipodoc", nullable = false)
 	private Integer tipoDocId = null;
-	
-	@Column(name="numero_documento", length = 15, nullable = false)
+
+	@Column(name = "numero_documento", length = 15, nullable = false)
 	private String numeroDocumento = null;
-	
-	@Column(name="id_sector", nullable = false)
+
+	@Column(name = "id_sector", nullable = false)
 	private Integer sectorId = null;
-	
-	public PersonaSectorPKEntity() {}
+
+	public PersonaSectorPKEntity() {
+	}
 
 	public PersonaSectorPKEntity(Integer tipoDocId, String numeroDocumento, Integer sectorId) {
 		super();
@@ -27,7 +28,7 @@ public class PersonaSectorPKEntity implements Serializable {
 		this.numeroDocumento = numeroDocumento;
 		this.sectorId = sectorId;
 	}
-	
+
 	public PersonaSectorPKEntity(PersonaEntity personaEntity, SectorEntity sectorEntity) {
 		this(personaEntity.getTipoDocumento().getId(), personaEntity.getNumeroDocumento(), sectorEntity.getId());
 	}
@@ -60,12 +61,9 @@ public class PersonaSectorPKEntity implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((numeroDocumento == null) ? 0 : numeroDocumento.hashCode());
-		result = prime * result
-				+ ((sectorId == null) ? 0 : sectorId.hashCode());
-		result = prime * result
-				+ ((tipoDocId == null) ? 0 : tipoDocId.hashCode());
+		result = prime * result + ((numeroDocumento == null) ? 0 : numeroDocumento.hashCode());
+		result = prime * result + ((sectorId == null) ? 0 : sectorId.hashCode());
+		result = prime * result + ((tipoDocId == null) ? 0 : tipoDocId.hashCode());
 		return result;
 	}
 

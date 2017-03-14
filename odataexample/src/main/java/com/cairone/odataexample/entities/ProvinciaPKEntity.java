@@ -6,17 +6,18 @@ import javax.persistence.*;
 
 @Embeddable
 public class ProvinciaPKEntity implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="id_pais", nullable = false)
+	@Column(name = "id_pais", nullable = false)
 	private Integer paisId = null;
 
-	@Column(name="id_provincia", nullable = false)
+	@Column(name = "id_provincia", nullable = false)
 	private Integer provinciaId = null;
 
-	public ProvinciaPKEntity() {}
-	
+	public ProvinciaPKEntity() {
+	}
+
 	public Integer getPaisId() {
 		return paisId;
 	}
@@ -38,8 +39,7 @@ public class ProvinciaPKEntity implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((paisId == null) ? 0 : paisId.hashCode());
-		result = prime * result
-				+ ((provinciaId == null) ? 0 : provinciaId.hashCode());
+		result = prime * result + ((provinciaId == null) ? 0 : provinciaId.hashCode());
 		return result;
 	}
 

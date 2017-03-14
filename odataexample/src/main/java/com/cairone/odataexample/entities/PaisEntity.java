@@ -6,21 +6,24 @@ import javax.persistence.*;
 
 import com.cairone.odataexample.edm.resources.PaisEdm;
 
-@Entity @Table(name="paises")
+@Entity
+@Table(name = "paises")
 public class PaisEntity implements Serializable {
-	
+
 	private static final long serialVersionUID = 1L;
 
-	@Id @Column(name="id_pais", nullable = false)
+	@Id
+	@Column(name = "id_pais", nullable = false)
 	private Integer id = null;
 
-	@Column(name="nombre", nullable = false, unique = true, length = 100)
+	@Column(name = "nombre", nullable = false, unique = true, length = 100)
 	private String nombre = null;
 
-	@Column(name="prefijo", nullable = true)
+	@Column(name = "prefijo", nullable = true)
 	private Integer prefijo = null;
 
-	public PaisEntity() {}
+	public PaisEntity() {
+	}
 
 	public PaisEntity(Integer id, String nombre, Integer prefijo) {
 		super();
@@ -83,7 +86,7 @@ public class PaisEntity implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return String.format("%s [%s]", nombre, id);

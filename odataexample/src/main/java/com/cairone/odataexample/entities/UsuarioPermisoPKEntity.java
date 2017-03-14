@@ -10,27 +10,28 @@ public class UsuarioPermisoPKEntity implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	@Column(name="id_tipodoc", nullable = false)
+	@Column(name = "id_tipodoc", nullable = false)
 	private Integer tipoDocId = null;
-	
-	@Column(name="numero_documento", length = 15, nullable = false)
-	private String numeroDocumento = null;
-	
-	@Column(name="nombre_permiso", nullable = false, length = 50)
-	private String nombrePermiso = null;
-	
-	public UsuarioPermisoPKEntity() {}
 
-	public UsuarioPermisoPKEntity(Integer tipoDocId, String numeroDocumento,
-			String nombrePermiso) {
+	@Column(name = "numero_documento", length = 15, nullable = false)
+	private String numeroDocumento = null;
+
+	@Column(name = "nombre_permiso", nullable = false, length = 50)
+	private String nombrePermiso = null;
+
+	public UsuarioPermisoPKEntity() {
+	}
+
+	public UsuarioPermisoPKEntity(Integer tipoDocId, String numeroDocumento, String nombrePermiso) {
 		super();
 		this.tipoDocId = tipoDocId;
 		this.numeroDocumento = numeroDocumento;
 		this.nombrePermiso = nombrePermiso;
 	}
-	
+
 	public UsuarioPermisoPKEntity(UsuarioEntity usuarioEntity, PermisoEntity permisoEntity) {
-		this(usuarioEntity.getPersona().getTipoDocumento().getId(), usuarioEntity.getPersona().getNumeroDocumento(), permisoEntity.getNombre());
+		this(usuarioEntity.getPersona().getTipoDocumento().getId(), usuarioEntity.getPersona().getNumeroDocumento(),
+				permisoEntity.getNombre());
 	}
 
 	public Integer getTipoDocId() {
@@ -61,12 +62,9 @@ public class UsuarioPermisoPKEntity implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result
-				+ ((nombrePermiso == null) ? 0 : nombrePermiso.hashCode());
-		result = prime * result
-				+ ((numeroDocumento == null) ? 0 : numeroDocumento.hashCode());
-		result = prime * result
-				+ ((tipoDocId == null) ? 0 : tipoDocId.hashCode());
+		result = prime * result + ((nombrePermiso == null) ? 0 : nombrePermiso.hashCode());
+		result = prime * result + ((numeroDocumento == null) ? 0 : numeroDocumento.hashCode());
+		result = prime * result + ((tipoDocId == null) ? 0 : tipoDocId.hashCode());
 		return result;
 	}
 
@@ -96,5 +94,5 @@ public class UsuarioPermisoPKEntity implements Serializable {
 			return false;
 		return true;
 	}
-	
+
 }

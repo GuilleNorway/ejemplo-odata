@@ -2,14 +2,14 @@ package com.cairone.odataexample.dtos;
 
 import com.cairone.odataexample.edm.resources.PaisEdm;
 
-
 public class PaisFrmDto {
 
 	private Integer id = null;
-	private String nombre= null;
+	private String nombre = null;
 	private Integer prefijo = null;
 
-	public PaisFrmDto() {}
+	public PaisFrmDto() {
+	}
 
 	public PaisFrmDto(Integer id, String nombre, Integer prefijo) {
 		super();
@@ -20,7 +20,8 @@ public class PaisFrmDto {
 
 	public PaisFrmDto(PaisEdm paisEdm) {
 		this.id = paisEdm.getId();
-		this.nombre = paisEdm.getNombre() == null || paisEdm.getNombre().trim().isEmpty() ? null : paisEdm.getNombre().trim().toUpperCase();
+		this.nombre = paisEdm.getNombre() == null || paisEdm.getNombre().trim().isEmpty() ? null
+				: paisEdm.getNombre().trim().toUpperCase();
 		this.prefijo = paisEdm.getPrefijo();
 	}
 
@@ -47,5 +48,5 @@ public class PaisFrmDto {
 	public void setPrefijo(Integer prefijo) {
 		this.prefijo = prefijo;
 	}
-	
+
 }

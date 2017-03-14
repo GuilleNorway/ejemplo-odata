@@ -13,26 +13,30 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-@Entity @Table(name="usuarios")
+@Entity
+@Table(name = "usuarios")
 public class UsuarioEntity {
 
-	@EmbeddedId private UsuarioPKEntity pk = null;
+	@EmbeddedId
+	private UsuarioPKEntity pk = null;
 
-	@OneToOne @MapsId("personaPKEntity") @JoinColumns({
-		@JoinColumn(name="id_tipodoc", referencedColumnName = "id_tipodoc", nullable = false, insertable = false, updatable = false),
-		@JoinColumn(name="numero_documento", referencedColumnName = "numero_documento", nullable = false, insertable = false, updatable = false)
-	})
+	@OneToOne
+	@MapsId("personaPKEntity")
+	@JoinColumns({
+			@JoinColumn(name = "id_tipodoc", referencedColumnName = "id_tipodoc", nullable = false, insertable = false, updatable = false),
+			@JoinColumn(name = "numero_documento", referencedColumnName = "numero_documento", nullable = false, insertable = false, updatable = false) })
 	private PersonaEntity persona = null;
 
-	@Column(name="nombre_usuario", nullable = false, length = 200)
+	@Column(name = "nombre_usuario", nullable = false, length = 200)
 	private String nombreUsuario = null;
 
-	@Column(name="clave", nullable = false, length = 40)
+	@Column(name = "clave", nullable = false, length = 40)
 	private String clave = null;
-	
-	@Column(name="fecha_alta", nullable = false) @Temporal(TemporalType.DATE)
+
+	@Column(name = "fecha_alta", nullable = false)
+	@Temporal(TemporalType.DATE)
 	private Date fechaAlta = null;
-	
+
 	@Column(name = "cuenta_vencida", nullable = false)
 	private Boolean cuentaVencida = null;
 
@@ -144,7 +148,7 @@ public class UsuarioEntity {
 			return false;
 		return true;
 	}
-	
+
 	@Override
 	public String toString() {
 		return String.format("%s [%s]", nombreUsuario, persona);

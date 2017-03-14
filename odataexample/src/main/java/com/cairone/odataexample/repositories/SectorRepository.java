@@ -5,6 +5,7 @@ import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 
 import com.cairone.odataexample.entities.SectorEntity;
 
-public interface SectorRepository extends JpaRepository<SectorEntity, Integer>, QueryDslPredicateExecutor<SectorEntity> {
+public interface SectorRepository
+		extends JpaRepository<SectorEntity, Integer>, QueryDslPredicateExecutor<SectorEntity> {
 
 }

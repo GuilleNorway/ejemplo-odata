@@ -6,6 +6,7 @@ import org.springframework.data.querydsl.QueryDslPredicateExecutor;
 import com.cairone.odataexample.entities.ProvinciaEntity;
 import com.cairone.odataexample.entities.ProvinciaPKEntity;
 
-public interface ProvinciaRepository extends JpaRepository<ProvinciaEntity, ProvinciaPKEntity>, QueryDslPredicateExecutor<ProvinciaEntity> {
+public interface ProvinciaRepository
+		extends JpaRepository<ProvinciaEntity, ProvinciaPKEntity>, QueryDslPredicateExecutor<ProvinciaEntity> {
 
 }

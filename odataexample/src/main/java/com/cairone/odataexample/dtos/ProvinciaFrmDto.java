@@ -7,7 +7,7 @@ public class ProvinciaFrmDto {
 	private Integer paisId = null;
 	private Integer id = null;
 	private String nombre = null;
-	
+
 	public ProvinciaFrmDto() {
 		super();
 	}
@@ -49,5 +49,5 @@ public class ProvinciaFrmDto {
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
-	
+
 }
