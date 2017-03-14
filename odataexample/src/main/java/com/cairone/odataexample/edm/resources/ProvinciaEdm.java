@@ -7,8 +7,8 @@ import com.sdl.odata.api.edm.annotations.EdmEntitySet;
 import com.sdl.odata.api.edm.annotations.EdmNavigationProperty;
 import com.sdl.odata.api.edm.annotations.EdmProperty;
 
-@EdmEntity(name = "Provincia", key = { "paisId",
-		"id" }, namespace = EntityServiceRegistar.NAME_SPACE, containerName = EntityServiceRegistar.CONTAINER_NAME)
+@EdmEntity(name = "Provincia", key = { "paisId","id" }, 
+	namespace = EntityServiceRegistar.NAME_SPACE, containerName = EntityServiceRegistar.CONTAINER_NAME)
 @EdmEntitySet("Provincias")
 public class ProvinciaEdm {
 

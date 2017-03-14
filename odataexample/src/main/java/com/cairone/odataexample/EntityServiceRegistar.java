@@ -23,6 +23,9 @@ public class EntityServiceRegistar {
 
 	@PostConstruct
 	public void registerEntities() throws ODataException {
-		oDataEdmRegistry.registerClasses(Arrays.asList(PaisEdm.class, ProvinciaEdm.class));
+		oDataEdmRegistry.registerClasses(
+				Arrays.asList(
+						PaisEdm.class, 
+						ProvinciaEdm.class));
 	}
 }
