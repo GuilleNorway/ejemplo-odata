@@ -17,6 +17,16 @@ public class ProvinciaPKEntity implements Serializable {
 
 	public ProvinciaPKEntity() {
 	}
+	
+	public ProvinciaPKEntity(Integer provinciaId, PaisEntity pais) {
+		this.provinciaId = provinciaId;
+		this.paisId = pais.getId();
+	}
+	
+	public ProvinciaPKEntity(Integer provinciaId, Integer paisId) {
+		this.provinciaId = provinciaId;
+		this.paisId = paisId;
+	}
 
 	public Integer getPaisId() {
 		return paisId;
