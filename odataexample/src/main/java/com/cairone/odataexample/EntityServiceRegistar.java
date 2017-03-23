@@ -26,6 +26,7 @@ public class EntityServiceRegistar {
 		oDataEdmRegistry.registerClasses(
 				Arrays.asList(
 						PaisEdm.class, 
-						ProvinciaEdm.class));
+						ProvinciaEdm.class,
+						UsuarioEdm.class));
 	}
 }
