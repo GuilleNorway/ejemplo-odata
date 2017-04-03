@@ -24,6 +24,7 @@ public class EntityServiceRegistar {
     public void registerEntities() throws ODataException {
 		oDataEdmRegistry.registerClasses(Arrays.asList(
 				PaisEdm.class,
-				ProvinciaEdm.class));
+				ProvinciaEdm.class,
+				SectorEdm.class));
     }
 }
