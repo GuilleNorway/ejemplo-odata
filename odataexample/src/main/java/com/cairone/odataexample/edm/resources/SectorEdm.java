@@ -14,15 +14,17 @@ public class SectorEdm {
 	private Integer id = null;
 	
 	@EdmProperty(nullable = false, maxLength = 100)
-	private String nombre= null;
+	private String nombre;
 	
 
-	public SectorEdm() {}
+	public SectorEdm() {	
+	}
 
 	public SectorEdm(Integer id, String nombre) {
 		super();
 		this.id = id;
 		this.nombre = nombre;
+		
 	}
 	
 	public SectorEdm(SectorEntity sectorEntity) {
@@ -38,11 +40,13 @@ public class SectorEdm {
 	}
 
 	public String getNombre() {
+
 		return nombre;
 	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+
 	}
 
 	@Override

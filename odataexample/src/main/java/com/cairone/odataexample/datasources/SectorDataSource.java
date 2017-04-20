@@ -78,15 +78,24 @@ public class SectorDataSource implements DataSourceProvider, DataSource {
 					}
 				}
 			}
+			
+			SectorEntity sectorEntity = sectorRepository.findOne(sectorFrmDto.getId());
 
-			SectorEntity sectorEntity = new SectorEntity();
+			if (sectorEntity != null) {
+				throw new ODataDataSourceException(
+						String.format("CLAVE DUPLICADA"));
+			} else {
 
-			sectorEntity.setId(sectorFrmDto.getId());
-			sectorEntity.setNombre(sectorFrmDto.getNombre());
+				sectorEntity = new SectorEntity();
 
-			sectorRepository.save(sectorEntity);
+				sectorEntity.setId(sectorFrmDto.getId());
+				sectorEntity.setNombre(sectorFrmDto.getNombre());
 
-			return new SectorEdm(sectorEntity);
+				sectorRepository.save(sectorEntity);
+
+				return new SectorEdm(sectorEntity);	
+			}
+
 		}
 
 		throw new ODataDataSourceException("LOS DATOS NO CORRESPONDEN A LA ENTIDAD SECTOR");
@@ -96,7 +105,7 @@ public class SectorDataSource implements DataSourceProvider, DataSource {
 	public Object update(ODataUri uri, Object entity, EntityDataModel entityDataModel) throws ODataException {
 
 		if (entity instanceof SectorEdm) {
-
+			
 			Map<String, Object> oDataUriKeyValues = ODataUriUtil
 					.asJavaMap(ODataUriUtil.getEntityKeyMap(uri, entityDataModel));
 
@@ -105,9 +114,14 @@ public class SectorDataSource implements DataSourceProvider, DataSource {
 			oDataUriKeyValues.values().forEach(item -> {
 				sector.setId(Integer.valueOf(item.toString()));
 			});
+			
 
 			SectorFrmDto sectorFrmDto = new SectorFrmDto(sector);
-
+			
+			//String test_name = "";
+			
+			//test_name = sector.getNombre();
+			
 			DataBinder binder = new DataBinder(sectorFrmDto);
 
 			binder.setValidator(sectorFrmDtoValidator);
@@ -134,7 +148,7 @@ public class SectorDataSource implements DataSourceProvider, DataSource {
 				throw new ODataDataSourceException(
 						String.format("NO SE ENCUENTRA UN SECTOR CON ID %s", sector.getId()));
 			}
-
+			
 			sectorEntity.setNombre(sectorFrmDto.getNombre());
 
 			sectorRepository.save(sectorEntity);

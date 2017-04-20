@@ -5,9 +5,10 @@ import com.cairone.odataexample.edm.resources.SectorEdm;
 public class SectorFrmDto {
 	
 	private Integer id = null;
-	private String nombre= null;
+	private String nombre;
 
-	public SectorFrmDto() {}
+	public SectorFrmDto() {
+	}
 
 	public SectorFrmDto(Integer id, String nombre, Integer prefijo) {
 		super();
@@ -18,7 +19,6 @@ public class SectorFrmDto {
 	public SectorFrmDto(SectorEdm sectorEdm) {
 		this.id = sectorEdm.getId();
 		this.nombre = sectorEdm.getNombre() == null || sectorEdm.getNombre().trim().isEmpty() ? null : sectorEdm.getNombre().trim().toUpperCase();
-
 	}
 
 	public Integer getId() {
