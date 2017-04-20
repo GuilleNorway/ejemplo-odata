@@ -5,7 +5,7 @@ import com.cairone.odataexample.edm.resources.SectorEdm;
 public class SectorFrmDto {
 	
 	private Integer id = null;
-	private String nombre;
+	private String nombre = null;
 
 	public SectorFrmDto() {
 	}

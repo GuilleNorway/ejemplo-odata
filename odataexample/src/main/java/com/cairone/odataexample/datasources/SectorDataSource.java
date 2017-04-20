@@ -10,6 +10,7 @@ import org.springframework.context.MessageSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
+import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.DataBinder;
@@ -43,6 +44,8 @@ import scala.Option;
 
 @Component
 public class SectorDataSource implements DataSourceProvider, DataSource {
+
+	private String httpMethod;
 
 	@Autowired
 	private SectorRepository sectorRepository = null;
@@ -78,12 +81,11 @@ public class SectorDataSource implements DataSourceProvider, DataSource {
 					}
 				}
 			}
-			
+
 			SectorEntity sectorEntity = sectorRepository.findOne(sectorFrmDto.getId());
 
 			if (sectorEntity != null) {
-				throw new ODataDataSourceException(
-						String.format("CLAVE DUPLICADA"));
+				throw new ODataDataSourceException(String.format("CLAVE DUPLICADA"));
 			} else {
 
 				sectorEntity = new SectorEntity();
@@ -93,7 +95,7 @@ public class SectorDataSource implements DataSourceProvider, DataSource {
 
 				sectorRepository.save(sectorEntity);
 
-				return new SectorEdm(sectorEntity);	
+				return new SectorEdm(sectorEntity);
 			}
 
 		}
@@ -105,7 +107,7 @@ public class SectorDataSource implements DataSourceProvider, DataSource {
 	public Object update(ODataUri uri, Object entity, EntityDataModel entityDataModel) throws ODataException {
 
 		if (entity instanceof SectorEdm) {
-			
+
 			Map<String, Object> oDataUriKeyValues = ODataUriUtil
 					.asJavaMap(ODataUriUtil.getEntityKeyMap(uri, entityDataModel));
 
@@ -115,12 +117,19 @@ public class SectorDataSource implements DataSourceProvider, DataSource {
 				sector.setId(Integer.valueOf(item.toString()));
 			});
 			
+			Integer sectorID = sector.getId();
+			SectorEntity sectorEntity = sectorRepository.findOne(sectorID);
+
+			if (sectorEntity == null) {
+				throw new ODataDataSourceException(
+						String.format("NO SE ENCUENTRA UN SECTOR CON ID %s", sector.getId()));
+			}
 
 			SectorFrmDto sectorFrmDto = new SectorFrmDto(sector);
 			
-			//String test_name = "";
-			
-			//test_name = sector.getNombre();
+			if (httpMethod.equals("PATCH") && (sectorFrmDto.getNombre() == null)) {
+				sectorFrmDto.setNombre(sectorEntity.getNombre());
+			}
 			
 			DataBinder binder = new DataBinder(sectorFrmDto);
 
@@ -141,14 +150,6 @@ public class SectorDataSource implements DataSourceProvider, DataSource {
 				}
 			}
 
-			Integer sectorID = sector.getId();
-			SectorEntity sectorEntity = sectorRepository.findOne(sectorID);
-
-			if (sectorEntity == null) {
-				throw new ODataDataSourceException(
-						String.format("NO SE ENCUENTRA UN SECTOR CON ID %s", sector.getId()));
-			}
-			
 			sectorEntity.setNombre(sectorFrmDto.getNombre());
 
 			sectorRepository.save(sectorEntity);
@@ -204,11 +205,13 @@ public class SectorDataSource implements DataSourceProvider, DataSource {
 
 	@Override
 	public DataSource getDataSource(ODataRequestContext requestContext) {
+		httpMethod = requestContext.getRequest().getMethod().toString();
 		return this;
 	}
 
 	@Override
-	public QueryOperationStrategy getStrategy(ODataRequestContext requestContext, QueryOperation operation, TargetType expectedODataEntityType) throws ODataException {
+	public QueryOperationStrategy getStrategy(ODataRequestContext requestContext, QueryOperation operation,
+			TargetType expectedODataEntityType) throws ODataException {
 		SectoresStrategyBuilder builder = new SectoresStrategyBuilder();
 		BooleanExpression expression = builder.buildCriteria(operation, requestContext);
 		List<Sort.Order> orderByList = builder.getOrderByList();

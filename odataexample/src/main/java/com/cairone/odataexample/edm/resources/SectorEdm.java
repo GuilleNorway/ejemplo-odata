@@ -13,8 +13,8 @@ public class SectorEdm {
 	@EdmProperty(nullable = false)
 	private Integer id = null;
 	
-	@EdmProperty(nullable = false, maxLength = 100)
-	private String nombre;
+	@EdmProperty(nullable = true, maxLength = 100)
+	private String nombre = null;
 	
 
 	public SectorEdm() {	
